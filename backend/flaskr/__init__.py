@@ -63,7 +63,8 @@ def create_app(test_config=None):
                     'success': True,
                     'categories': categories_dict,
                     'status_code': 200,
-                    'total_categories': len(categories)
+                    'total_categories': len(categories),
+                    'status_message': 'OK'
                 })
         except Exception:
             abort(422)
@@ -126,7 +127,8 @@ def create_app(test_config=None):
                 'success':  True,
                 'deleted': question_id,
                 'question': current_questions,
-                'total_questions': len(selection)
+                'total_questions': len(selection),
+                'status_message': 'OK'
             })
         except:
             abort(422)
@@ -163,7 +165,8 @@ def create_app(test_config=None):
             return jsonify({
                 'success':  True,
                 'question': current_questions,
-                'total_questions': len(selection)
+                'total_questions': len(selection),
+                'status_message': 'OK'
             })
         except:
             abort(422)
@@ -187,7 +190,8 @@ def create_app(test_config=None):
                     'success': True,
                     'questions': current_question,
                     'currentCategory': list(set([question['category'] for question in current_question])),
-                    'totalQuestions': len(selection)
+                    'totalQuestions': len(selection),
+                    'status_message': 'OK'
                 })
         except:
             abort(500)
@@ -211,7 +215,8 @@ def create_app(test_config=None):
                 'success': True,
                 'questions': current_questions,
                 'totalQuestions': len(questions),
-                'currentCategory': current_category.format()
+                'currentCategory': current_category.format(),
+                'status_message': 'OK'
             })
         except:
             abort(422)
@@ -243,7 +248,7 @@ def create_app(test_config=None):
         if len(all_questions) == len(previous_questions):
             return jsonify({
                 'success': True,
-                'question': None
+                'question': None,
             })
         else:
             random_questions = []
@@ -256,7 +261,8 @@ def create_app(test_config=None):
             selected_question = random_questions[random.randint(0, len(random_questions)-1)]
             return jsonify({
                 'success': True,
-                'question': selected_question
+                'question': selected_question,
+                'status_message': 'OK'
             })
         
     '''
@@ -280,7 +286,7 @@ def create_app(test_config=None):
             "success": False,
             "error": 422,
             "message": "unprocessable"
-        }), 404
+        }), 422
 
     @app.errorhandler(400)
     def bad_request(error):
@@ -288,7 +294,7 @@ def create_app(test_config=None):
             "success": False,
             "error": 400,
             "message": "bad request"
-        }), 404
+        }), 400
 
     @app.errorhandler(405)
     def not_found(error):
@@ -296,7 +302,7 @@ def create_app(test_config=None):
             "success": False,
             "error": 405,
             "message": "not found"
-        }), 404
+        }), 405
     return app
 
     

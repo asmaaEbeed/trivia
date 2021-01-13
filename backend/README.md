@@ -206,3 +206,111 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
+
+- get categories endpoint test function
+  ```/categories```
+  Run success
+  '''
+        When Test it response is..
+
+        Ran 1 test in 0.801s
+       
+        OK
+    '''
+  
+  - test exist page of questions => page 1 using test_paginate_questions function
+    ```'/questions?page=1'```
+    Run sucess
+    '''
+        When Test it response is..
+
+        Ran 2 tests in 1.247s
+      
+        OK
+    '''
+
+  - test not exist page of questions => page 100
+    ```/questions?page=100```
+    FAILED
+    '''
+         When Test it response is..
+
+         AssertionError: 422 != 200
+
+         Ran 3 tests in 2.388s 
+
+         FAILED (failures=1)
+    '''
+  
+  - test get questions using test_retrieve_questions function
+    ```/questions```
+    RUN success
+    '''
+    When test runs it response successfulu
+
+    Ran 3 tests in 1.796s
+
+    OK
+    '''
+
+  - delete questions endpoint test function with valid id test_delete_question Func.
+    ```questions/2```
+    RUN success
+    '''
+    Ran 4 tests in 2.268s
+
+    OK
+    '''
+
+  - delete questions endpoint test_delete_question_422 function with Not valid id
+    ```questions/2```
+    FAILED
+    '''
+    Ran 5 tests in 2.615s
+
+    FAILED (failures=2)
+    '''
+
+  - test create question successfuly test_create_question
+    ```/questions```
+    RUN success
+    '''
+    Ran 4 tests in 2.465s
+
+    OK
+    '''
+
+  - get questions by category endpoint test_category_questions function
+    ```/categories/1/questions```
+    RUN success
+    '''
+    Ran 5 tests in 2.424s
+
+    OK
+    '''
+
+  - get questions by category error endpoint test_category_questions_422 function
+    ```/categories/15/questions```
+    FAILED
+    '''
+    FAILED
+    (failures=1)
+
+    '''
+
+  - questions search endpoint test_search_for_question function
+    ```/questions/search```
+    RUN success
+    '''
+    Ran 6 tests in 2.771s 
+    OK
+    '''
+
+  - play quizz endpoint test_play_quizz function
+    ```/quizzes```
+      post with quiz_category, previous_questions
+      RUN SUCCESS
+      '''
+      Ran 7 tests in 3.298s
+      OK
+      '''
