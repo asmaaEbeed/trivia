@@ -156,7 +156,7 @@ def create_app(test_config=None):
             abort(422)
 
         try:
-            question = Question(question=question, answer=answer, difficulty=difficulty, cat_Id=category)
+            question = Question(question, answer, difficulty, category)
             question.insert()
 
             selection = Question.query.order_by(Question.id).all()
@@ -184,15 +184,18 @@ def create_app(test_config=None):
     def search_for_question():
         search_term = request.get_json()['searchTerm']
         try:
-            selection = Question.query.filter(Question.question.ilike('%{}%'.format(search_term))).all()
-            current_question = paginate_questions(request, selection)
-            return jsonify({
-                    'success': True,
-                    'questions': current_question,
-                    'currentCategory': list(set([question['category'] for question in current_question])),
-                    'totalQuestions': len(selection),
-                    'status_message': 'OK'
-                })
+            if(search_term == ""):
+                abort(422)
+            else:
+                selection = Question.query.filter(Question.question.ilike('%{}%'.format(search_term))).all()
+                current_question = paginate_questions(request, selection)
+                return jsonify({
+                        'success': True,
+                        'questions': current_question,
+                        'currentCategory': list(set([question['category'] for question in current_question])),
+                        'totalQuestions': len(selection),
+                        'status_message': 'OK'
+                    })
         except:
             abort(500)
     '''
