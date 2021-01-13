@@ -106,21 +106,21 @@ class TriviaTestCase(unittest.TestCase):
     '''
         delete questions endpoint test function with valid id test_delete_question Func.
     '''
-    # def test_delete_question(self):
+    def test_delete_question(self):
         
-    #     response = self.client().delete('questions/2')
-    #     data = json.loads(response.data)
+        response = self.client().delete('questions/2')
+        data = json.loads(response.data)
 
-    #     self.assertEqual(data['success'], True)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertEqual(data['status_message'], 'OK')
-    #     '''
-    #     When test run it response successful
+        self.assertEqual(data['success'], True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['status_message'], 'OK')
+        '''
+        When test run it response successful
 
-    #     Ran 4 tests in 2.268s
+        Ran 4 tests in 2.268s
 
-    #     OK
-    #     '''
+        OK
+        '''
     '''
         delete questions endpoint test_delete_question_422 function with Not valid id
     '''
